@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "857333673347",
+    "firebase_url": "https://medocare-d798d-default-rtdb.firebaseio.com",
+    "project_id": "medocare-d798d",
+    "storage_bucket": "medocare-d798d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857333673347:android:10a81c4bff65bae4c51ab6",
+        "android_client_info": {
+          "package_name": "com.example.medocare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857333673347-b3ng7072qs0ogp13lfu82o8j8fs9ektd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxbHmp-R0ztWc-qNCHKtE1FlTihwYBAaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857333673347-b3ng7072qs0ogp13lfu82o8j8fs9ektd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857333673347:android:c5ab6061019cdf2cc51ab6",
+        "android_client_info": {
+          "package_name": "com.tanishi.medocare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857333673347-b3ng7072qs0ogp13lfu82o8j8fs9ektd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxbHmp-R0ztWc-qNCHKtE1FlTihwYBAaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857333673347-b3ng7072qs0ogp13lfu82o8j8fs9ektd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
