@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +26,63 @@ public class SignInActivity extends AppCompatActivity {
     private TextView mTextView;
     private FirebaseAuth mAuth;
 
+    CheckBox remember;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        remember = findViewById(R.id.checkBoxRemember);
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","true");
+                    editor.putString("email",email.getText().toString());
+                    editor.putString("pass",pass.getText().toString());
+                    editor.apply();
+                    Toast.makeText(SignInActivity.this, "Checked",Toast.LENGTH_SHORT).show();
+
+                }else if(!compoundButton.isChecked()){
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","false");
+                    editor.apply();
+                    Toast.makeText(SignInActivity.this, "Un-Checked",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
 
         email = findViewById(R.id.emailLogin);
         pass = findViewById(R.id.passLogin);
         mTextView = findViewById(R.id.signupTextView);
         mAuth = FirebaseAuth.getInstance();
         signinButton = (Button)findViewById(R.id.buttonLogin);
+
+        SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+        String checkbox = preferences.getString("remember","");
+        String useremail = preferences.getString("email","");
+        String userpass = preferences.getString("pass","");
+        if(checkbox.equals("true")){
+
+            rememberlogin(useremail,userpass);
+            /*Intent intent = new Intent(SignInActivity.this, Dashboard.class);
+            intent.putExtra("user",email.getText().toString());
+            startActivity(intent);*/
+        }else if(checkbox.equals("false")){
+            Toast.makeText(this,"Sign in",Toast.LENGTH_SHORT).show();
+        }
+
+
+
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +99,38 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+    private void rememberlogin(String uemail,String upass){
+        String emailS = uemail;
+        String passS = upass;
+        if(!emailS.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailS).matches() && !passS.isEmpty()){
+            mAuth.signInWithEmailAndPassword(emailS, passS)
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(SignInActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignInActivity.this, Dashboard.class);
+                            intent.putExtra("user", emailS);
+                            startActivity(intent);
+                            //startActivity(new Intent(SignInActivity.this, Dashboard.class));
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+
+
+
+
     private void loginUser(){
         String emailS = email.getText().toString();
         String passS = pass.getText().toString();
@@ -58,7 +140,10 @@ public class SignInActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(SignInActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, Dashboard.class));
+                            Intent intent = new Intent(SignInActivity.this, Dashboard.class);
+                            intent.putExtra("user", emailS);
+                            startActivity(intent);
+                            //startActivity(new Intent(SignInActivity.this, Dashboard.class));
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
