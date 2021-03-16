@@ -30,30 +30,38 @@ public class SignInActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
 
-
+        remember = findViewById(R.id.checkBoxRemember);
         logoutstat =findViewById(R.id.textView);
-        String logoutstatus = "false";
+
         logoutstat.setText("false");
-        Bundle extras = getIntent().getExtras();
-        if(extras != null) {
-            logoutstatus = extras.getString("logoutstatus");
-            logoutstat.setText(logoutstatus);
-        }
+        /*String logoutstatus = "false";
+        logoutstat.setText("false");*/
+        /*Bundle extras = getIntent().getExtras();
+        if(extras != null && extras.getString("logoutstatus") == "true") {
+
+            logoutstat.setText(extras.getString("logoutstatus"));
+            remember.setChecked(false);
+        }*/
 
         email = findViewById(R.id.emailLogin);
         pass = findViewById(R.id.passLogin);
         mTextView = findViewById(R.id.signupTextView);
-        remember = findViewById(R.id.checkBoxRemember);
+
         mAuth = FirebaseAuth.getInstance();
         signinButton = (Button)findViewById(R.id.buttonLogin);
 
-        String finalLogoutstatus = logoutstat.getText().toString();
+        //String finalLogoutstatus = logoutstat.getText().toString();
+
+
+
+
 
         remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -85,10 +93,12 @@ public class SignInActivity extends AppCompatActivity {
 
 
         SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-        String checkbox = preferences.getString("remember","");
+        String checkbox;
+
+        checkbox = preferences.getString("remember","");
         String useremail = preferences.getString("email","");
         String userpass = preferences.getString("pass","");
-        if(checkbox.equals("true") && finalLogoutstatus == "false"){
+        if(checkbox.equals("true") /*&& finalLogoutstatus == "false"*/){
 
             mAuth.signInWithEmailAndPassword(useremail,userpass)
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -99,7 +109,7 @@ public class SignInActivity extends AppCompatActivity {
                             intent.putExtra("user", useremail);
                             startActivity(intent);
                             //startActivity(new Intent(SignInActivity.this, Dashboard.class));
-                            finish();
+                            //finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -111,7 +121,7 @@ public class SignInActivity extends AppCompatActivity {
             /*Intent intent = new Intent(SignInActivity.this, Dashboard.class);
             intent.putExtra("user",email.getText().toString());
             startActivity(intent);*/
-        }else if(checkbox.equals("false" )|| finalLogoutstatus == "true"){
+        }else if(checkbox.equals("false" )/*|| finalLogoutstatus == "true"*/){
             Toast.makeText(this,"Sign in",Toast.LENGTH_SHORT).show();
         }
 

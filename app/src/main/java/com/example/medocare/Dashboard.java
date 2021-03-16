@@ -35,6 +35,8 @@ public class Dashboard extends AppCompatActivity {
                 Intent intent = new Intent(Dashboard.this, SignInActivity.class);
                 intent.putExtra("logoutstatus","true");
                 startActivity(intent);
+                finish();
+                //startActivity(intent);
             }
         });
 
