@@ -59,18 +59,18 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Dashboard.this, "Reminder set", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Dashboard.this, ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(Dashboard.this,0,intent,0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(Dashboard.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                /*Calendar calendar = Calendar.getInstance();
-                calendar.set(2021, 03, 17,
-                        Integer.parseInt(hr.getText().toString()), Integer.parseInt(min.getText().toString()), 0);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(2021, 2, 17,
+                        19,32, 0);
                 long startTime = calendar.getTimeInMillis();
-*/
+
                 long timeAtClick = System.currentTimeMillis();
                 long tenSec = 1000*10;
-                alarmManager.set(AlarmManager.RTC_WAKEUP,
-                        timeAtClick + tenSec,
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        startTime, AlarmManager.INTERVAL_DAY,
                         pendingIntent);
 
             }
