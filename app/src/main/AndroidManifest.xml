@@ -24,6 +24,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>
