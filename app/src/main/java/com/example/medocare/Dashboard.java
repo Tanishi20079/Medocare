@@ -63,14 +63,23 @@ public class Dashboard extends AppCompatActivity {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(2021, 2, 17,
-                        19,32, 0);
+
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 20);  //pass hour which you have select
+                calendar.set(Calendar.MINUTE, 5);  //pass min which you have select
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                // Check we aren't setting it in the past which would trigger it to fire instantly
+                if(calendar.getTimeInMillis() < System.currentTimeMillis()) {
+                    calendar.add(Calendar.DAY_OF_YEAR, 7);
+                }
+
                 long startTime = calendar.getTimeInMillis();
 
                 long timeAtClick = System.currentTimeMillis();
                 long tenSec = 1000*10;
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                        startTime, AlarmManager.INTERVAL_DAY,
+                        startTime, AlarmManager.INTERVAL_DAY * 7,
                         pendingIntent);
 
             }
