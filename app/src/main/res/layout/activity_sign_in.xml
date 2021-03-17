@@ -13,11 +13,16 @@
         android:layout_width="311dp"
         android:layout_height="41dp"
         android:layout_marginTop="309dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:ems="10"
+        android:background="@drawable/custom_input"
         android:hint="Enter your Email"
         android:textColorHint="@color/purple_200"
+        android:textSize="13sp"
         android:textColor="@color/black"
         android:inputType="textPersonName"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +33,12 @@
         android:layout_width="311dp"
         android:layout_height="41dp"
         android:layout_marginTop="18dp"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="10dp"
         android:ems="10"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:background="@drawable/custom_input"
         android:hint="Password"
         android:textColorHint="@color/purple_200"
         android:textColor="@color/black"
@@ -40,10 +50,12 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="311dp"
+        android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginTop="85dp"
         android:text="Sign In"
+        android:background="@drawable/custom_button"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passLogin" />
@@ -58,7 +70,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/Maroon"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="20dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
