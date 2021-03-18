@@ -47,7 +47,7 @@ public class ImageActivity extends AppCompatActivity {
         viewAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ViewActivity.class));
+                Toast.makeText(ImageActivity.this,"View all Prescriptions",Toast.LENGTH_SHORT).show();
             }
         });
 

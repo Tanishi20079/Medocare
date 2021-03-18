@@ -21,8 +21,9 @@ import com.example.medocare.SetReminders;
 
 
 public class HomeFragment extends Fragment {
-    First_Fragment fragment;
-    Second_Fragment secfrag;
+
+    //First_Fragment fragment;
+    //Second_Fragment secfrag;
    private TextView viewremider,viewprescription;
 
     @Override
@@ -33,7 +34,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+/*
         fragment = new First_Fragment();
         secfrag = new Second_Fragment();
         FragmentManager manager = getChildFragmentManager();
@@ -41,6 +42,8 @@ public class HomeFragment extends Fragment {
         fragmentTransaction.add(R.id.fragment, fragment);
         fragmentTransaction.add(R.id.fragment2, secfrag);
         fragmentTransaction.commit();
+
+ */
         viewprescription=(TextView)root.findViewById(R.id.viewprescrip);
         viewremider=(TextView) root.findViewById(R.id.viewreminder);
         viewprescription.setOnClickListener(new View.OnClickListener() {

@@ -68,10 +68,6 @@ public class SetReminders extends AppCompatActivity {
                         //quant_type=(TextView)findViewById(R.id.recycle_repeat_info);
                         reminderlist.add("Medicine Name:" + m + "\n Time:" + t + "\n Quantity:" + q);
                         arrayAdapter.notifyDataSetChanged();
-
-
-                        //setting the alarm
-
                     }
                 }
             }

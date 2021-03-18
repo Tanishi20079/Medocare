@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentManager;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -62,6 +64,9 @@ public class UploadPrescription extends AppCompatActivity {
     private EditText doctorName;
     // view for image view
     private ImageView imageView;
+    private static final String FRAGMENT_NAME = "imageFragment";
+    ImageRetainingFragment imageRetainingFragment;
+
 
 
     // Uri indicates, where the image will be picked from
@@ -137,8 +142,15 @@ public class UploadPrescription extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                String str=doctorName.getText().toString();
+                String Tag="hello";
+                Log.i(Tag,str);
+                if(!str.isEmpty()) {
 //             uploadImage();
-                upload();
+                    upload();
+                }
+                else
+                    Toast.makeText(UploadPrescription.this,"Kindly enter doctor name",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -363,4 +375,30 @@ public class UploadPrescription extends AppCompatActivity {
                 });
 
     }
+    private void initializeImageRetainingFragment() {
+        // find the retained fragment on activity restarts
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        this.imageRetainingFragment = (ImageRetainingFragment) fragmentManager.findFragmentByTag(FRAGMENT_NAME);
+        // create the fragment and bitmap the first time
+        if (this.imageRetainingFragment == null) {
+            this.imageRetainingFragment = new ImageRetainingFragment();
+            fragmentManager.beginTransaction()
+                    // Add a fragment to the activity state.
+                    .add(this.imageRetainingFragment, FRAGMENT_NAME)
+                    .commit();
+        }
+    }
+
+    private void tryLoadImage() {
+        if (this.imageRetainingFragment == null) {
+            return;
+        }
+        Bitmap selectedImage = this.imageRetainingFragment.getImage();
+        if (selectedImage == null) {
+            return;
+        }
+        ImageView selectedImageView = (ImageView) findViewById(R.id.imgView);
+        selectedImageView.setImageBitmap(selectedImage);
+    }
+
 }

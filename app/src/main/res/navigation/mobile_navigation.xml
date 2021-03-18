@@ -10,6 +10,10 @@
         android:name="com.example.medocare.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment android:id="@+id/add_notes"
+        android:name="com.example.medocare.ui.NotesFragment"
+        android:label="Add Notes"
+        tools:layout="@layout/fragment_notes"/>
 
     <fragment
         android:id="@+id/nav_profile"
@@ -26,7 +30,7 @@
     <fragment
         android:id="@+id/nav_help"
         android:name="com.example.medocare.ui.help.HelpFragment"
-        android:label="@string/menu_help"
+        android:label="About Us"
         tools:layout="@layout/fragment_help" />
 
     <fragment
